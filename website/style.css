@@ -1,0 +1,95 @@
+body
+{
+    background-color: mediumpurple;
+}
+
+img.main_logo_anyway
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+img.main_logo_spacegame
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+
+/* Navigation bar */
+
+.topnav
+{
+    overflow: hidden;
+    background-color: #A508FB;
+
+    font-family: Arial, serif;
+    font-size: 24pt;
+
+    margin: 0 auto 1%;
+}
+
+.topnav a
+{
+    float: left;
+    color: #000000;
+    background-color: #A508FB;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover
+{
+    background-color: rgba(105, 0, 163, 0.7);
+    color: black;
+}
+
+.topnav a.active
+{
+    background-color: #6900a3;
+    color: #ffffff;
+}
+
+/* Highscore table */
+
+table
+{
+    font-size: 32pt;
+    font-family: Calibri, serif;
+
+    padding: 0;
+    border-spacing: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th
+{
+    font-size: 38pt;
+    background-color: rgba(105, 0, 163, 0.31);
+}
+
+td, tr
+{
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #6900a3;
+}
+
+tr:hover
+{
+    background-color: rgba(131, 0, 191, 0.1);
+}
+
+
+
+

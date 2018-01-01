@@ -49,7 +49,6 @@ function sendHighscores(request, response)
         game = data.game;
     }
 
-    console.log(game);
     connection.query("SELECT MAX(score) AS highscore, p.name, s.date FROM players p, games g, scores s WHERE g.name = \"" + game + "\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore desc;",
         function(err, res, fields) {
 
@@ -107,7 +106,7 @@ function addScore(request, response)
     var score = data.score;
     var game = data.game;
 
-    if(token !== " ")
+    if(token !== "filavandrel")
     {
         response.send("invalid token.");
         return;
@@ -162,8 +161,4 @@ function addScore(request, response)
             }
 
         });
-}
-
-function addPlayer(name)
-{
 }
