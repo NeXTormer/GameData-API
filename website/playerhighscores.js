@@ -1,6 +1,6 @@
 $(function ()
 {
-    $.getJSON("/scores/100000", function(data) {
+    $.getJSON("/highscores", function(data) {
         fillTable(data);
     });
 
@@ -10,7 +10,7 @@ $(function ()
 
 function timer()
 {
-    $.getJSON("/scores/100000", function(data) {
+    $.getJSON("/highscores", function(data) {
         fillTable(data);
         console.log("Updated table.");
     });
