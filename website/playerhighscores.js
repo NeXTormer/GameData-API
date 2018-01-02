@@ -1,6 +1,6 @@
 $(function ()
 {
-    $.getJSON("/highscores", function(data) {
+    $.getJSON("/highscores/spacegame", function(data) {
         fillTable(data);
     });
 
@@ -8,11 +8,17 @@ $(function ()
 
 });
 
+$("#gameslider").change(function() {
+    timer();
+});
+
 function timer()
 {
-    $.getJSON("/highscores", function(data) {
+    var game = document.getElementById("gameslider").checked;
+    var url = "/highscores/" + (game ? "spacegame" : "anyway");
+
+    $.getJSON(url, function(data) {
         fillTable(data);
-        console.log("Updated table.");
     });
 }
 

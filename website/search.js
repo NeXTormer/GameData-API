@@ -9,12 +9,21 @@ $(function()
     window.setInterval(timer, 500);
 });
 
+$("#gameslider").change(function() {
+    sessionStorage.setItem("gameslider", this.checked);
+    timer();
+});
 
 function timer()
 {
     if(!searched) return;
 
-    $.getJSON("/search/" + username, function(data) {
+    var game = document.getElementById("gameslider").checked;
+    var url = "/search/" + username + "/" + (game ? "spacegame" : "anyway");
+
+    console.log(url);
+
+    $.getJSON(url, function(data) {
         fillTable(data);
     });
 }
@@ -24,10 +33,9 @@ function searchPlayer()
     var textfield = document.getElementById("username");
     searched = true;
     username = textfield.value;
+    if(username === "") username = "skdjhfk";
 
-    $.getJSON("/search/" + username, function(data) {
-        fillTable(data);
-    });
+    timer();
 }
 
 $(function () {

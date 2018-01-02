@@ -11,8 +11,6 @@ var connection = mysql.createConnection({
     database: "gamedata"
 });
 
-
-
 connection.connect(function(error) {
     if(error == null)
     {
@@ -31,8 +29,9 @@ server = app.listen(3000, function() {
 app.use(express.static("website"));
 
 app.get("/highscores/:game?", sendHighscores);
-app.get("/search/:player", searchPlayer);
+app.get("/search/:player/:game?", searchPlayer);
 app.get("/scores/:count?/:game?", sendScores);
+app.get("/schub", schub);
 
 app.get("/addscore/:token/:player/:score/:game", addScore);
 
@@ -62,7 +61,7 @@ function searchPlayer(request, response)
 {
     var data = request.params;
 
-    connection.query("SELECT p.name, score, s.date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = 1 and s.game_id = g.id and p.name = \"" + data.player + "\" ORDER BY date DESC;",
+    connection.query("SELECT p.name, score, s.date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = \"" + data.player + "\" ORDER BY date DESC;",
         function(err, res, fields) {
             response.send(res);
     });
@@ -154,4 +153,9 @@ function addScore(request, response)
             }
 
         });
+}
+
+function schub(request, response)
+{
+    response.send("werner");
 }

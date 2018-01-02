@@ -47,6 +47,17 @@ img.main_logo_spacegame
     font-size: 17px;
 }
 
+.topnav a.leftnav
+{
+    float: right;
+}
+
+.topnav a.leftnav:hover
+{
+    color: #000000;
+    background-color: #A508FB;
+}
+
 .topnav a:hover
 {
     background-color: rgba(105, 0, 163, 0.7);
@@ -152,4 +163,66 @@ div.searchtable, div.abouttext
 
 ::placeholder { /* Most modern browsers support this now. */
     color: mediumpurple;
+}
+
+.switch
+{
+    float: right;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 36px;
+}
+
+.switch input
+{
+    display:none;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #a508fb;
+    -webkit-transition: .2s;
+    transition: .2s;
+    margin-top: 10%;
+    margin-bottom: 0;
+
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 36px;
+    width: 36px;
+
+    background-color: #8300bf;
+    -webkit-transition: .1s;
+    transition: .4s;
+
+    margin-top: 0;
+    margin-bottom: 0;
+
+}
+
+input:checked + .slider {
+    background-color: #a508fb;
+
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #a508fb;
+
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+
 }
