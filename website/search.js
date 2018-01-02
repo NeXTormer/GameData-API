@@ -21,8 +21,6 @@ function timer()
     var game = document.getElementById("gameslider").checked;
     var url = "/search/" + username + "/" + (game ? "spacegame" : "anyway");
 
-    console.log(url);
-
     $.getJSON(url, function(data) {
         fillTable(data);
     });
