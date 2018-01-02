@@ -11,6 +11,8 @@ var connection = mysql.createConnection({
     database: "gamedata"
 });
 
+
+
 connection.connect(function(error) {
     if(error == null)
     {
@@ -59,19 +61,10 @@ function sendHighscores(request, response)
 function searchPlayer(request, response)
 {
     var data = request.params;
-    var resp = "<style>p { font-size: 20px; } \n h1 { font-size=40px;, color=red; }</style>";
-    resp += "<b><h1>Search results for " + data.player + "</h1></b><p>";
 
     connection.query("SELECT p.name, score, s.date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = 1 and s.game_id = g.id and p.name = \"" + data.player + "\" ORDER BY date DESC;",
         function(err, res, fields) {
-
-            for(var i = 0; i < res.length; i++)
-            {
-                resp += ("Score: " + res[i].score + ", Date: " + res[i].date + "<br>");
-            }
-
-            resp += "</p>";
-            response.send(resp);
+            response.send(res);
     });
 }
 

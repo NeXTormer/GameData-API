@@ -90,6 +90,66 @@ tr:hover
     background-color: rgba(131, 0, 191, 0.1);
 }
 
+/* input */
 
+button
+{
+    background-color: rgba(105, 0, 163, 0.31);
+    border: white;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 24pt;
+}
 
+button:hover
+{
+    background-color: rgba(105, 0, 163, 0.5);
+}
 
+button:active
+{
+    background-color: rgba(105, 0, 163, 0.7);
+}
+
+input
+{
+    background-color: rgba(105, 0, 163, 0.31);
+    border: white;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 24pt;
+}
+
+input:hover
+{
+    background-color: rgba(105, 0, 163, 0.5);
+}
+
+div.searchtable, div.abouttext
+{
+    margin-top: 2%;
+}
+
+/* Placeholder text color in textfield */
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: mediumpurple;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: mediumpurple;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color-color: mediumpurple;
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: mediumpurple;
+}
+:-ms-input-placeholder { /* Microsoft Edge */
+    color: mediumpurple;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+    color: mediumpurple;
+}

@@ -1,23 +1,47 @@
-$(function ()
+var searched = false;
+var username = "";
+
+$(function()
 {
-    $.getJSON("/scores/100000", function(data) {
-        fillTable(data);
-    });
+    var textfield = document.getElementById("username");
+    textfield.placeholder = "Enter username...";
 
     window.setInterval(timer, 500);
 });
 
+
 function timer()
 {
-    $.getJSON("/scores/100000", function(data) {
+    if(!searched) return;
+
+    $.getJSON("/search/" + username, function(data) {
         fillTable(data);
-        console.log("Updated table.");
     });
 }
 
+function searchPlayer()
+{
+    var textfield = document.getElementById("username");
+    searched = true;
+    username = textfield.value;
+
+    $.getJSON("/search/" + username, function(data) {
+        fillTable(data);
+    });
+}
+
+$(function () {
+    $('#username').keydown(function(event) {
+        if (event.keyCode === 13) {
+            searchPlayer();
+            return false;
+        }
+    });
+});
+
 function fillTable(data)
 {
-   // get headers
+    // get headers
     var col = [];
     for (var i = 0; i < data.length; i++) {
         for (var key in data[i]) {
