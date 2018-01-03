@@ -1,28 +1,35 @@
 console.log("Server is starting...");
 
+var mysql = require("mysql");
 var express = require("express");
+var fs = require("fs");
 
 var app = express();
 
-var mysql = require("mysql");
-var connection = mysql.createConnection({
-    host: "10.0.0.254",
-    port: "3306",
-    user: "user",
-    password: "PeterRendl69!",
-    database: "gamedata"
+var connection;
+var auth_token;
+
+fs.readFile("credentials.json", "utf8", function(error, data) {
+    var json = JSON.parse(data);
+
+    connection = mysql.createConnection(json[0]);
+    auth_token = json[1].token;
+
+    connection.connect(function(error) {
+        if(error == null)
+        {
+            console.log("Sucessfully connected to MySQL server with id " + connection.threadId + ".")
+        }
+        else
+        {
+            console.log(error);
+        }
+    });
 });
 
-connection.connect(function(error) {
-    if(error == null)
-    {
-        console.log("Sucessfully connected to MySQL server with id " + connection.threadId + ".")
-    }
-    else
-    {
-        console.log(error);
-    }
-});
+
+
+
 
 server = app.listen(3000, function() {
     console.log("listening...");
@@ -108,7 +115,7 @@ function addScore(request, response)
     var score = data.score;
     var game = data.game;
 
-    if(token !== "filavandrel")
+    if(token !== auth_token)
     {
         response.send("invalid token.");
         return;
