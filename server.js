@@ -33,14 +33,12 @@ app.use(express.static("website"));
 app.get("/highscores/:game?", sendHighscores);
 app.get("/search/:player/:game?", searchPlayer);
 app.get("/scores/:count?/:game?", sendScores);
-app.get("/schub", schub);
 
 app.get("/addscore/:token/:player/:score/:game", addScore);
 
 function sendHighscores(request, response)
 {
     var data = request.params;
-    var resp = "Highscores: <br>";
     var game;
 
     if(!data.game)
@@ -52,7 +50,17 @@ function sendHighscores(request, response)
         game = data.game;
     }
 
-    connection.query("SELECT MAX(score) AS highscore, p.name, s.date FROM players p, games g, scores s WHERE g.name = \"" + game + "\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore desc;",
+    var query;
+    if(game.toLowerCase().charAt(0) === "a")
+    {
+        query = "SELECT MIN(score) AS highscore, p.name, s.date FROM players p, games g, scores s WHERE g.name = \"anyway\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore ASC;";
+    }
+    else
+    {
+        query = "SELECT MAX(score) AS highscore, p.name, s.date FROM players p, games g, scores s WHERE g.name = \"" + game + "\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore DESC;";
+    }
+
+    connection.query(query,
         function(err, res, fields) {
 
         response.send(res);
@@ -85,7 +93,7 @@ function sendScores(request, response)
         limit = data.count;
     }
 
-    connection.query("SELECT p.name, s.score, s.date FROM players p, games g, scores s WHERE g.name = \"" + game +"\" AND s.game_id = g.id AND s.player_id = p.id ORDER BY score DESC LIMIT " + limit + ";",
+    connection.query("SELECT p.name, s.score, s.date FROM players p, games g, scores s WHERE g.name = \"" + game +"\" AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";",
         function(err, resp, fields) {
             response.send(resp);
         });
@@ -105,7 +113,6 @@ function addScore(request, response)
         response.send("invalid token.");
         return;
     }
-
 
     var query = "SELECT id FROM players WHERE name = \"" + player + "\";";
     connection.query(query,
@@ -212,9 +219,4 @@ function addScore(request, response)
                     });
             }
         });
-}
-
-function schub(request, response)
-{
-    response.send("werner");
 }
