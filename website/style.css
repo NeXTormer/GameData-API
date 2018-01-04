@@ -87,6 +87,9 @@ th
 {
     font-size: 38pt;
     background-color: rgba(105, 0, 163, 0.31);
+    padding-left: 60px;
+    padding-right: 60px;
+
 }
 
 td, tr
