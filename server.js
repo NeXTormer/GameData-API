@@ -69,8 +69,23 @@ function sendHighscores(request, response)
 
     connection.query(query,
         function(err, res, fields) {
+            for(var i = 0; i < res.length; i++)
+            {
+                var datef1 = (res[i].date + "");
+                var date2 = datef1.split(" ");
+                var date3;
+                if(!date2[1])
+                {
+                    date3 = " ";
+                }
+                else
+                {
+                    date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
+                }
+                res[i].date = date3;
+            }
 
-        response.send(res);
+            response.send(res);
     });
 }
 
@@ -80,6 +95,21 @@ function searchPlayer(request, response)
 
     connection.query("SELECT p.name, score, s.date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = \"" + data.player + "\" ORDER BY date DESC;",
         function(err, res, fields) {
+            for(var i = 0; i < res.length; i++)
+            {
+                var datef1 = (res[i].date + "");
+                var date2 = datef1.split(" ");
+                var date3;
+                if(!date2[1])
+                {
+                    date3 = " ";
+                }
+                else
+                {
+                    date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
+                }
+                res[i].date = date3;
+            }
             response.send(res);
     });
 }
@@ -102,6 +132,21 @@ function sendScores(request, response)
 
     connection.query("SELECT p.name, s.score, s.date FROM players p, games g, scores s WHERE g.name = \"" + game +"\" AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";",
         function(err, resp, fields) {
+            for(var i = 0; i < resp.length; i++)
+            {
+                var datef1 = (resp[i].date + "");
+                var date2 = datef1.split(" ");
+                var date3;
+                if(!date2[1])
+                {
+                    date3 = " ";
+                }
+                else
+                {
+                    date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
+                }
+                resp[i].date = date3;
+            }
             response.send(resp);
         });
 }

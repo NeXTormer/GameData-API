@@ -24,7 +24,6 @@ function timer()
 
 function fillTable(data)
 {
-
     // get headers
     var col = [];
     for (var i = 0; i < data.length; i++) {
