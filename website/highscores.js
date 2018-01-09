@@ -35,6 +35,8 @@ function fillTable(data)
         }
     }
 
+
+
     // create html table
     var table = document.createElement("table");
 

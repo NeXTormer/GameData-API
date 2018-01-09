@@ -27,10 +27,6 @@ fs.readFile("credentials.json", "utf8", function(error, data) {
     });
 });
 
-
-
-
-
 server = app.listen(3000, function() {
     console.log("listening...");
 });
@@ -60,11 +56,11 @@ function sendHighscores(request, response)
     var query;
     if(game.toLowerCase().charAt(0) === "a")
     {
-        query = "SELECT MIN(score) AS highscore, p.name, s.date FROM players p, games g, scores s WHERE g.name = \"anyway\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore ASC;";
+        query = "SELECT MIN(score) AS Highscore, p.name AS Name, s.date FROM players p, games g, scores s WHERE g.name = \"anyway\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore ASC;";
     }
     else
     {
-        query = "SELECT MAX(score) AS highscore, p.name, s.date FROM players p, games g, scores s WHERE g.name = \"" + game + "\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore DESC;";
+        query = "SELECT MAX(score) AS Highscore, p.name AS Name, s.date FROM players p, games g, scores s WHERE g.name = \"" + game + "\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore DESC;";
     }
 
     connection.query(query,
@@ -93,7 +89,7 @@ function searchPlayer(request, response)
 {
     var data = request.params;
 
-    connection.query("SELECT p.name, score, s.date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = \"" + data.player + "\" ORDER BY date DESC;",
+    connection.query("SELECT score as Score, p.name as Name, s.date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = \"" + data.player + "\" ORDER BY date DESC;",
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++)
             {
@@ -130,7 +126,7 @@ function sendScores(request, response)
         limit = data.count;
     }
 
-    connection.query("SELECT p.name, s.score, s.date FROM players p, games g, scores s WHERE g.name = \"" + game +"\" AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";",
+    connection.query("SELECT s.score as Score, p.name as Name, s.date FROM players p, games g, scores s WHERE g.name = \"" + game +"\" AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";",
         function(err, resp, fields) {
             for(var i = 0; i < resp.length; i++)
             {
