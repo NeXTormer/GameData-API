@@ -56,18 +56,18 @@ function sendHighscores(request, response)
     var query;
     if(game.toLowerCase().charAt(0) === "a")
     {
-        query = "SELECT MIN(score) AS Highscore, p.name AS Name, s.date FROM players p, games g, scores s WHERE g.name = \"anyway\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore ASC;";
+        query = "SELECT MIN(score) AS Highscore, p.name AS Name, s.date as Date FROM players p, games g, scores s WHERE g.name = \"anyway\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore ASC;";
     }
     else
     {
-        query = "SELECT MAX(score) AS Highscore, p.name AS Name, s.date FROM players p, games g, scores s WHERE g.name = \"" + game + "\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore DESC;";
+        query = "SELECT MAX(score) AS Highscore, p.name AS Name, s.date as Date FROM players p, games g, scores s WHERE g.name = \"" + game + "\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore DESC;";
     }
 
     connection.query(query,
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++)
             {
-                var datef1 = (res[i].date + "");
+                var datef1 = (res[i].Date + "");
                 var date2 = datef1.split(" ");
                 var date3;
                 if(!date2[1])
@@ -78,7 +78,7 @@ function sendHighscores(request, response)
                 {
                     date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
                 }
-                res[i].date = date3;
+                res[i].Date = date3;
             }
 
             response.send(res);
@@ -89,11 +89,11 @@ function searchPlayer(request, response)
 {
     var data = request.params;
 
-    connection.query("SELECT score as Score, p.name as Name, s.date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = \"" + data.player + "\" ORDER BY date DESC;",
+    connection.query("SELECT score as Score, p.name as Name, s.date as Date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = \"" + data.player + "\" ORDER BY date DESC;",
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++)
             {
-                var datef1 = (res[i].date + "");
+                var datef1 = (res[i].Date + "");
                 var date2 = datef1.split(" ");
                 var date3;
                 if(!date2[1])
@@ -104,7 +104,7 @@ function searchPlayer(request, response)
                 {
                     date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
                 }
-                res[i].date = date3;
+                res[i].Date = date3;
             }
             response.send(res);
     });
@@ -126,11 +126,11 @@ function sendScores(request, response)
         limit = data.count;
     }
 
-    connection.query("SELECT s.score as Score, p.name as Name, s.date FROM players p, games g, scores s WHERE g.name = \"" + game +"\" AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";",
+    connection.query("SELECT s.score as Score, p.name as Name, s.date as Date FROM players p, games g, scores s WHERE g.name = \"" + game +"\" AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";",
         function(err, resp, fields) {
             for(var i = 0; i < resp.length; i++)
             {
-                var datef1 = (resp[i].date + "");
+                var datef1 = (resp[i].Date + "");
                 var date2 = datef1.split(" ");
                 var date3;
                 if(!date2[1])
@@ -141,7 +141,7 @@ function sendScores(request, response)
                 {
                     date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
                 }
-                resp[i].date = date3;
+                resp[i].Date = date3;
             }
             response.send(resp);
         });
