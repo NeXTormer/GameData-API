@@ -7,8 +7,12 @@
   },
   "dependencies": {
     "express": "^4.15.5",
+    "jQuery": "^1.7.4",
+    "jquery": "^3.2.1",
+    "jsdom": "^11.5.1",
     "mysql": "^2.15.0",
     "nodemon": "^1.14.6",
+    "numeral": "^2.0.6",
     "pm2": "^2.9.1"
   }
 }

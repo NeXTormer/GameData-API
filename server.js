@@ -80,7 +80,6 @@ function sendHighscores(request, response)
                 }
                 res[i].Date = date3;
             }
-
             response.send(res);
     });
 }
@@ -267,4 +266,29 @@ function addScore(request, response)
                     });
             }
         });
+}
+
+//Not working because JavaScript ES5
+function orderScore(j, resp)
+{
+    scoren = 0;
+    minutes = 0;
+    seconds = 0;
+    ms = 0;
+
+    var scoren = resp[j].Score;
+
+    var minutes = Math.floor(scoren / 60);
+    var seconds = (scoren % 60).toFixed(0);
+    var ms = ((scoren % 1) * 100);
+
+    console.log(minutes);
+    console.log(seconds);
+    console.log(ms);
+
+    var a = minutes.toString();
+    var b = seconds.toString();
+    var c = ms.toString();
+
+    resp[j].Score = a + ":" + b;
 }
