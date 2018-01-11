@@ -67,6 +67,7 @@ function sendHighscores(request, response)
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++)
             {
+                //Format Date
                 var datef1 = (res[i].Date + "");
                 var date2 = datef1.split(" ");
                 var date3;
@@ -78,6 +79,19 @@ function sendHighscores(request, response)
                 {
                     date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
                 }
+
+                //Format Score
+                if(game.toLowerCase().charAt(0) === "a")
+                {
+                    var scoren = res[i].Highscore;
+
+                    var minutes = Math.floor(scoren / 60);
+                    var seconds = (scoren % 60).toFixed(0);
+                    var ms = ((scoren % 1) * 100);
+
+                    res[i].Highscore = minutes + ":" + seconds + "." + ms.toFixed(0);
+                }
+
                 res[i].Date = date3;
             }
             response.send(res);
@@ -92,6 +106,7 @@ function searchPlayer(request, response)
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++)
             {
+                //Format Date
                 var datef1 = (res[i].Date + "");
                 var date2 = datef1.split(" ");
                 var date3;
@@ -102,6 +117,18 @@ function searchPlayer(request, response)
                 else
                 {
                     date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
+                }
+
+                //Format Score
+                if(data.game.toLowerCase().charAt(0) === "a")
+                {
+                    var scoren = res[i].Score;
+
+                    var minutes = Math.floor(scoren / 60);
+                    var seconds = (scoren % 60).toFixed(0);
+                    var ms = ((scoren % 1) * 100);
+
+                    res[i].Score = minutes + ":" + seconds + "." + ms.toFixed(0);
                 }
                 res[i].Date = date3;
             }
@@ -129,6 +156,7 @@ function sendScores(request, response)
         function(err, resp, fields) {
             for(var i = 0; i < resp.length; i++)
             {
+                //Format Date
                 var datef1 = (resp[i].Date + "");
                 var date2 = datef1.split(" ");
                 var date3;
@@ -141,9 +169,25 @@ function sendScores(request, response)
                     date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
                 }
                 resp[i].Date = date3;
+
+
+                //Format Score
+                if(game.toLowerCase().charAt(0) === "a")
+                {
+                    var scoren = resp[i].Score;
+
+                    var minutes = Math.floor(scoren / 60);
+                    var seconds = (scoren % 60).toFixed(0);
+                    var ms = ((scoren % 1) * 100);
+
+                    resp[i].Score = minutes + ":" + seconds + "." + ms.toFixed(0);
+                }
+
             }
             response.send(resp);
         });
+
+
 }
 
 function addScore(request, response)
@@ -266,29 +310,4 @@ function addScore(request, response)
                     });
             }
         });
-}
-
-//Not working because JavaScript ES5
-function orderScore(j, resp)
-{
-    scoren = 0;
-    minutes = 0;
-    seconds = 0;
-    ms = 0;
-
-    var scoren = resp[j].Score;
-
-    var minutes = Math.floor(scoren / 60);
-    var seconds = (scoren % 60).toFixed(0);
-    var ms = ((scoren % 1) * 100);
-
-    console.log(minutes);
-    console.log(seconds);
-    console.log(ms);
-
-    var a = minutes.toString();
-    var b = seconds.toString();
-    var c = ms.toString();
-
-    resp[j].Score = a + ":" + b;
 }
