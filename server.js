@@ -7,7 +7,7 @@ var fs = require("fs");
 var app = express();
 
 var connection;
-var auth_token;
+var api_token;
 
 var port = 3000;
 
@@ -15,7 +15,7 @@ fs.readFile("credentials.json", "utf8", function(error, data) {
     var json = JSON.parse(data);
 
     connection = mysql.createConnection(json[0]);
-    auth_token = json[1].token;
+    api_token = json[1].token;
 
     connection.connect(function(error) {
         if(error == null)
@@ -197,7 +197,7 @@ function addScore(request, response)
     var score = data.score;
     var game = data.game;
 
-    if(token !== auth_token)
+    if(token !== api_token)
     {
         response.send("invalid token.");
         return;
