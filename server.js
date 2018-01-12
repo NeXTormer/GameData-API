@@ -9,6 +9,8 @@ var app = express();
 var connection;
 var auth_token;
 
+var port = 3000;
+
 fs.readFile("credentials.json", "utf8", function(error, data) {
     var json = JSON.parse(data);
 
@@ -27,8 +29,8 @@ fs.readFile("credentials.json", "utf8", function(error, data) {
     });
 });
 
-server = app.listen(3000, function() {
-    console.log("listening...");
+server = app.listen(port, function() {
+    console.log("listening on port " + port);
 });
 
 app.use(express.static("website"));
@@ -153,11 +155,11 @@ function sendScores(request, response)
     }
 
     connection.query("SELECT s.score as Score, p.name as Name, s.date as Date FROM players p, games g, scores s WHERE g.name = \"" + game +"\" AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";",
-        function(err, resp, fields) {
-            for(var i = 0; i < resp.length; i++)
+        function(err, res, fields) {
+            for(var i = 0; i < res.length; i++)
             {
                 //Format Date
-                var datef1 = (resp[i].Date + "");
+                var datef1 = (res[i].Date + "");
                 var date2 = datef1.split(" ");
                 var date3;
                 if(!date2[1])
@@ -168,26 +170,22 @@ function sendScores(request, response)
                 {
                     date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
                 }
-                resp[i].Date = date3;
-
+                res[i].Date = date3;
 
                 //Format Score
                 if(game.toLowerCase().charAt(0) === "a")
                 {
-                    var scoren = resp[i].Score;
+                    var scoren = res[i].Score;
 
                     var minutes = Math.floor(scoren / 60);
                     var seconds = (scoren % 60).toFixed(0);
                     var ms = ((scoren % 1) * 100);
 
-                    resp[i].Score = minutes + ":" + seconds + "." + ms.toFixed(0);
+                    res[i].Score = minutes + ":" + seconds + "." + ms.toFixed(0);
                 }
-
             }
-            response.send(resp);
+            response.send(res);
         });
-
-
 }
 
 function addScore(request, response)
@@ -208,29 +206,29 @@ function addScore(request, response)
     var query = "SELECT id FROM players WHERE name = \"" + player + "\";";
     connection.query(query,
         function(err, resp, fields) {
-        var t_id;
-        if(resp instanceof Array)
-        {
-            try
+            var t_id;
+            if(resp instanceof Array)
             {
-                t_id = resp[0].id;
+                try
+                {
+                    t_id = resp[0].id;
+                }
+                catch(e)
+                {
+                    t_id = -1;
+                }
             }
-            catch(e)
+            else
             {
-                t_id = -1;
+                try
+                {
+                    t_id = resp.id;
+                }
+                catch(e)
+                {
+                    t_id = -1;
+                }
             }
-        }
-        else
-        {
-            try
-            {
-                t_id = resp.id;
-            }
-            catch(e)
-            {
-                t_id = -1;
-            }
-        }
 
             if(t_id === -1)
             {
@@ -253,10 +251,7 @@ function addScore(request, response)
                                             });
                                         });
                                 }
-
                             });
-
-
                     });
             }
             else
@@ -265,7 +260,6 @@ function addScore(request, response)
                 var e_query = "SELECT id FROM games WHERE name = \"" + game + "\";";
                 connection.query(e_query,
                     function(err, resp, fields) {
-
                         var g_id;
                         if(resp instanceof Array)
                         {
