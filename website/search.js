@@ -6,7 +6,7 @@ $(function()
     var textfield = document.getElementById("username");
     textfield.placeholder = "Enter username...";
 
-    window.setInterval(timer, 5000);
+    window.setInterval(timer, 1000);
 });
 
 $("#gameslider").change(function() {
