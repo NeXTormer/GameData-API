@@ -115,6 +115,15 @@ button
     font-size: 24pt;
 }
 
+.playerinfo
+{
+    background-color: rgba(105, 0, 163, 0.31);
+    padding: 5px 10px;
+    font-size: 24pt;
+    text-align: center;
+    float: right;
+}
+
 button:hover
 {
     background-color: rgba(105, 0, 163, 0.5);

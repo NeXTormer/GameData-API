@@ -28,10 +28,19 @@ function timer()
 
 function searchPlayer()
 {
+    var infocontainer = document.getElementById("playerinfocontainer");
+
+    var url = "/";
+    $.getJSON(url, function(data) {
+        infocontainer.innerHTML = "<a class=\"playerinfo\" id=\"playerinfo\">Schubwerner</a>";
+    });
+
     var textfield = document.getElementById("username");
     searched = true;
     username = textfield.value;
     if(username === "") username = "skdjhfk";
+
+
 
     timer();
 }
@@ -83,4 +92,8 @@ function fillTable(data)
     var divContainer = document.getElementById("insertTable");
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
+
+
+
+
 }

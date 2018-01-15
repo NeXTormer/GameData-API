@@ -38,6 +38,7 @@ app.use(express.static("website"));
 app.get("/highscores/:game?", sendHighscores);
 app.get("/search/:player/:game?", searchPlayer);
 app.get("/scores/:count?/:game?", sendScores);
+app.get("/player/:name/:game", sendPlayerInfo);
 
 app.get("/addscore/:token/:player/:score/:game", addScore);
 
@@ -304,4 +305,32 @@ function addScore(request, response)
                     });
             }
         });
+}
+
+function sendPlayerInfo(request, response)
+{
+    var data = request.params;
+    var player = data.name;
+
+
+    var query;
+    if(data.game.toLowerCase().charAt(0) === "a")
+    {
+        query = "SELECT p.name as name, p.regdate AS date, min(s.score) AS highscore FROM players p, scores s, games g WHERE s.player_id = p.id AND s.game_id = g.id AND g.name = \"anyway\" AND p.name = \"" + player + "\" LIMIT 1;";
+    }
+    else
+    {
+        query = "SELECT p.name AS name, p.regdate AS date, max(s.score) AS highscore FROM players p, scores s, games g WHERE s.player_id = p.id AND s.game_id = g.id AND g.name = \"spacegame\" AND p.name = \"" + player + "\" LIMIT 1;";
+    }
+
+    connection.query(query, function(error, res, fields) {
+        var apiresponse = {
+            name: res[0].name,
+            date: res[0].date + "",
+            highscore: res[0].highscore
+        };
+        console.log(res);
+        response.send(apiresponse);
+    });
+
 }
