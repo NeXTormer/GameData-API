@@ -324,12 +324,37 @@ function sendPlayerInfo(request, response)
     }
 
     connection.query(query, function(error, res, fields) {
+        //format date
+        var datef1 = (res[0].date + "");
+        var date2 = datef1.split(" ");
+        var date3;
+        if(!date2[1])
+        {
+            date3 = " ";
+        }
+        else
+        {
+            date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
+        }
+        res[0].date = date3;
+
+        //format score
+        if(data.game.toLowerCase().charAt(0) === "a")
+        {
+            var scoren = res[0].highscore;
+
+            var minutes = Math.floor(scoren / 60);
+            var seconds = (scoren % 60).toFixed(0);
+            var ms = ((scoren % 1) * 100);
+
+            res[0].highscore = minutes + ":" + seconds + "." + ms.toFixed(0);
+        }
+
         var apiresponse = {
             name: res[0].name,
-            date: res[0].date + "",
+            date: res[0].date,
             highscore: res[0].highscore
         };
-        console.log(res);
         response.send(apiresponse);
     });
 

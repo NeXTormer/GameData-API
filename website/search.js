@@ -6,7 +6,7 @@ $(function()
     var textfield = document.getElementById("username");
     textfield.placeholder = "Enter username...";
 
-    window.setInterval(timer, 500);
+    window.setInterval(timer, 5000);
 });
 
 $("#gameslider").change(function() {
@@ -24,16 +24,24 @@ function timer()
     $.getJSON(url, function(data) {
         fillTable(data);
     });
+
+    var url2 = "/player/" + username + "/" + (document.getElementById("gameslider").checked ? "spacegame" : "anyway");
+    $.getJSON(url2, function(data) {
+        var infocontainer = document.getElementById("playerinfocontainer");
+        if(data.name === null)
+        {
+            infocontainer.innerHTML = "<a class=\"playerinfo\" id=\"playerinfo\">Player not found!</a>";
+        }
+        else
+        {
+            infocontainer.innerHTML = "<a class=\"playerinfo\" id=\"playerinfo\">Highscore: " + data.highscore + " | Player since: " + data.date + "</a>";
+        }
+    });
 }
 
 function searchPlayer()
 {
     var infocontainer = document.getElementById("playerinfocontainer");
-
-    var url = "/";
-    $.getJSON(url, function(data) {
-        infocontainer.innerHTML = "<a class=\"playerinfo\" id=\"playerinfo\">Schubwerner</a>";
-    });
 
     var textfield = document.getElementById("username");
     searched = true;
@@ -41,6 +49,17 @@ function searchPlayer()
     if(username === "") username = "skdjhfk";
 
 
+    var url = "/player/" + username + "/" + (document.getElementById("gameslider").checked ? "spacegame" : "anyway");
+    $.getJSON(url, function(data) {
+        if(data.name === null)
+        {
+            infocontainer.innerHTML = "<a class=\"playerinfo\" id=\"playerinfo\">Player not found!</a>";
+        }
+        else
+        {
+            infocontainer.innerHTML = "<a class=\"playerinfo\" id=\"playerinfo\">Highscore: " + data.highscore + " | Player since: " + data.date + "</a>";
+        }
+    });
 
     timer();
 }
