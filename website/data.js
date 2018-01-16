@@ -1,30 +1,25 @@
 $(function ()
 {
-    $.getJSON("/highscores/spacegame", function(data) {
+    $.getJSON("/get/", function(data) {
         fillTable(data);
     });
 
     window.setInterval(timer, 500);
-
-});
-
-$("#gameslider").change(function() {
-    timer();
 });
 
 function timer()
 {
-    var game = document.getElementById("gameslider").checked;
-    var url = "/highscores/" + (game ? "spacegame" : "anyway");
+    var url = "/get/";
 
     $.getJSON(url, function(data) {
         fillTable(data);
     });
+
 }
 
 function fillTable(data)
 {
-    // get headers
+   // get headers
     var col = [];
     for (var i = 0; i < data.length; i++) {
         for (var key in data[i]) {
@@ -33,6 +28,8 @@ function fillTable(data)
             }
         }
     }
+
+
 
     // create html table
     var table = document.createElement("table");
@@ -61,3 +58,19 @@ function fillTable(data)
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
 }
+
+/*
+$("#gameslider").change(function() {
+    var logo = document.getElementById("logo");
+    if(this.checked)
+    {
+        logo.src = "res/logo_spacegame.png";
+        logo.class = "main_logo_spacegame";
+    }
+    else
+    {
+        logo.src = "res/logo.png";
+        logo.class = "main_logo_anyway";
+    }
+});
+*/
