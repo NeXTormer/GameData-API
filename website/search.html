@@ -1,0 +1,39 @@
+<html>
+<title>Anyway</title>
+<link rel="icon" href="res/icon.png">
+<link rel=stylesheet type=text/css href="style.css">
+
+<head>
+    <img class="main_logo_anyway" id="logo" src="res/logo.png">
+</head>
+<body>
+    <div class="topnav">
+        <a href="index.html">Highscores</a>
+        <a href="playerhighscores.html">Highscores per Player</a>
+        <a class="active" href="search.html">Search</a>
+        <a href="about.html">About</a>
+
+        <a class="leftnav">SpaceGame</a>
+        <label class="switch">
+            <input type="checkbox" id="gameslider" checked>
+            <span class="slider"></span>
+        </label>
+        <a class="leftnav">Anyway</a>
+    </div>
+
+    <div class="input">
+        <input type="text" name="schubwerner" id="username">
+        <button onclick="searchPlayer()">Search</button>
+        <a id="playerinfocontainer"></a>
+    </div>
+
+
+
+    <div id="insertTable" class="searchtable"></div>
+
+</body>
+
+<script type="text/javascript" src="libraries/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="search.js"></script>
+
+</html>
