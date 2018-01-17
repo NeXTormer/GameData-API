@@ -1,17 +1,17 @@
 <html>
 <title>Anyway</title>
 <link rel="icon" href="res/icon.png">
-<link rel=stylesheet type=text/css href="style.css">
+<link rel=stylesheet type=text/css href="home.css">
 
 <head>
     <img class="main_logo_anyway" id="logo" src="res/logo.png">
 </head>
 <body>
 <div class="topnav">
-    <a class="active" href="index.html">Highscores</a>
+    <a class="active" href="index.html">Home</a>
+    <a href="listscores.html">Highscores</a>
     <a href="playerhighscores.html">Highscores per Player</a>
     <a href="search.html">Search</a>
-    <a href="about.html">About</a>
 
     <a class="leftnav">SpaceGame</a>
     <label class="switch">
@@ -23,11 +23,25 @@
 
 </div>
 
-<div id="insertTable"></div>
+<div class="downloads">
+    <table id="dtable">
+        <tr>
+            <td class="ddata">
+                <a href="https://github.com/NeXTormer/SpaceGamev2/releases/download/v0.5/spacegamev0.5_17_21.apk">
+                    <img class="dlbtn" src="res/dlspacegame.png" href>
+                </a>
+            </td>
+            <td class="ddata">
+                <a href="https://github.com/NeXTormer/Anyway/releases/download/v0.9/Anyway_Holz_Bitzan_16_01_2018.zip">
+                    <img class="dlbtn" src="res/dlanyway.png">
+                </a>
+            </td>
+        </tr>
+    </table>
+
+</div>
 
 </body>
 
-<script type="text/javascript" src="libraries/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="highscores.js"></script>
 
 </html>

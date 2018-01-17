@@ -31,7 +31,7 @@ img.main_logo_spacegame
     background-color: #A508FB;
 
     font-family: Arial, serif;
-    font-size: 24pt;
+    font-size: 32pt;
 
     margin: 0 auto 1%;
 }
@@ -76,7 +76,7 @@ table
 {
     font-size: 32pt;
     font-family: Arial, serif;
-
+    margin-top: 4%;
     padding: 0;
     border-spacing: 0;
     margin-left: auto;
@@ -94,14 +94,14 @@ th
 
 td, tr
 {
-    padding: 12px;
+    padding: 30px;
+
     text-align: center;
-    border-bottom: 2px solid #6900a3;
 }
 
-tr:hover
+.dlbtn
 {
-    background-color: rgba(131, 0, 191, 0.1);
+    width: 80%;
 }
 
 /* input */
@@ -118,9 +118,8 @@ button
 .playerinfo
 {
     background-color: rgba(105, 0, 163, 0.31);
-    font-family: Arial, serif;
     padding: 5px 10px;
-    font-size: 23pt;
+    font-size: 24pt;
     text-align: center;
     float: right;
 }
@@ -205,6 +204,7 @@ div.searchtable, div.abouttext
     transition: .2s;
     margin-top: 18%;
     margin-bottom: 0;
+
 }
 
 .slider:before {
@@ -237,3 +237,4 @@ input:checked + .slider:before {
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
+
