@@ -1,6 +1,7 @@
 var searched = false;
 var username = "";
 
+
 $(function()
 {
     var textfield = document.getElementById("username");
@@ -19,13 +20,13 @@ function timer()
     if(!searched) return;
 
     var game = document.getElementById("gameslider").checked;
-    var url = "/search/" + username + "/" + (game ? "spacegame" : "anyway");
+    var url = "search/" + username + "/" + (game ? "spacegame" : "anyway");
 
     $.getJSON(url, function(data) {
         fillTable(data);
     });
 
-    var url2 = "/player/" + username + "/" + (document.getElementById("gameslider").checked ? "spacegame" : "anyway");
+    var url2 = "player/" + username + "/" + (document.getElementById("gameslider").checked ? "spacegame" : "anyway");
     $.getJSON(url2, function(data) {
         var infocontainer = document.getElementById("playerinfocontainer");
         if(data.name === null)
@@ -49,7 +50,7 @@ function searchPlayer()
     if(username === "") username = "skdjhfk";
 
 
-    var url = "/player/" + username + "/" + (document.getElementById("gameslider").checked ? "spacegame" : "anyway");
+    var url = "player/" + username + "/" + (document.getElementById("gameslider").checked ? "spacegame" : "anyway");
     $.getJSON(url, function(data) {
         if(data.name === null)
         {
@@ -111,8 +112,4 @@ function fillTable(data)
     var divContainer = document.getElementById("insertTable");
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
-
-
-
-
 }

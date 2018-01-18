@@ -1,6 +1,7 @@
+
 $(function ()
 {
-    $.getJSON("/scores/1000/spacegame", function(data) {
+    $.getJSON("scores/1000/spacegame", function(data) {
         fillTable(data);
     });
 
@@ -15,7 +16,7 @@ $("#gameslider").change(function() {
 function timer()
 {
     var game = document.getElementById("gameslider").checked;
-    var url = "/scores/1000/" + (game ? "spacegame" : "anyway");
+    var url = "scores/1000/" + (game ? "spacegame" : "anyway");
 
     $.getJSON(url, function(data) {
         fillTable(data);
@@ -34,9 +35,6 @@ function fillTable(data)
             }
         }
     }
-
-
-
     // create html table
     var table = document.createElement("table");
 
@@ -64,19 +62,3 @@ function fillTable(data)
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
 }
-
-/*
-$("#gameslider").change(function() {
-    var logo = document.getElementById("logo");
-    if(this.checked)
-    {
-        logo.src = "res/logo_spacegame.png";
-        logo.class = "main_logo_spacegame";
-    }
-    else
-    {
-        logo.src = "res/logo.png";
-        logo.class = "main_logo_anyway";
-    }
-});
-*/

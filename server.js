@@ -59,13 +59,28 @@ function sendHighscores(request, response)
     var query;
     if(game.toLowerCase().charAt(0) === "a")
     {
-        query = "SELECT MIN(score) AS Highscore, p.name AS Name, s.date as Date FROM players p, games g, scores s WHERE g.name = \"anyway\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore ASC;";
+        query = "select a.score as Highscore, p.name as Name, a.date as Date from scores a, players p, games g " +
+            "where a.score = (select min(score) from scores b, games g2 " +
+            "where b.player_id = a.player_id " +
+            "and b.game_id = g.id " +
+            "and g.name = \"anyway\") " +
+            "and a.player_id = p.id " +
+            "and a.game_id = g.id " +
+            "and g.name = \"anyway\"" +
+            "order by a.score asc;"
     }
     else
     {
-        query = "SELECT MAX(score) AS Highscore, p.name AS Name, s.date as Date FROM players p, games g, scores s WHERE g.name = \"" + game + "\" AND s.game_id = g.id AND s.player_id = p.id GROUP BY p.name ORDER BY highscore DESC;";
+        query = "select a.score as Highscore, p.name as Name, a.date as Date from scores a, players p, games g " +
+            "where a.score = (select max(score) from scores b, games g2 " +
+            "where b.player_id = a.player_id " +
+            "and b.game_id = g.id " +
+            "and g.name = \"spacegame\") " +
+            "and a.player_id = p.id " +
+            "and a.game_id = g.id " +
+            "and g.name = \"spacegame\"" +
+            "order by a.score desc;";
     }
-
     connection.query(query,
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++)
@@ -91,8 +106,21 @@ function sendHighscores(request, response)
                     var minutes = Math.floor(scoren / 60);
                     var seconds = (scoren % 60).toFixed(0);
                     var ms = ((scoren % 1) * 100);
+                    ms = Math.round(ms);
+                    if(minutes < 10)
+                    {
+                        minutes = "0" + minutes.toString();
+                    }
+                    if(seconds < 10)
+                    {
+                        seconds = "0" + seconds.toString();
+                    }
+                    if(ms < 10)
+                    {
+                        ms = "0" + ms.toString();
+                    }
 
-                    res[i].Highscore = minutes + ":" + seconds + "." + ms.toFixed(0);
+                    res[i].Highscore = minutes + ":" + seconds + "." + ms;
                 }
 
                 res[i].Date = date3;
@@ -131,7 +159,22 @@ function searchPlayer(request, response)
                     var seconds = (scoren % 60).toFixed(0);
                     var ms = ((scoren % 1) * 100);
 
-                    res[i].Score = minutes + ":" + seconds + "." + ms.toFixed(0);
+                    ms = Math.round(ms);
+                    if(minutes < 10)
+                    {
+                        minutes = "0" + minutes.toString();
+                    }
+                    if(seconds < 10)
+                    {
+                        seconds = "0" + seconds.toString();
+                    }
+                    if(ms < 10)
+                    {
+                        ms = "0" + ms.toString();
+                    }
+
+
+                    res[i].Score = minutes + ":" + seconds + "." + ms;
                 }
                 res[i].Date = date3;
             }
@@ -182,7 +225,22 @@ function sendScores(request, response)
                     var seconds = (scoren % 60).toFixed(0);
                     var ms = ((scoren % 1) * 100);
 
-                    res[i].Score = minutes + ":" + seconds + "." + ms.toFixed(0);
+                    ms = Math.round(ms);
+                    if(minutes < 10)
+                    {
+                        minutes = "0" + minutes.toString();
+                    }
+                    if(seconds < 10)
+                    {
+                        seconds = "0" + seconds.toString();
+                    }
+                    if(ms < 10)
+                    {
+                        ms = "0" + ms.toString();
+                    }
+
+
+                    res[i].Score = minutes + ":" + seconds + "." + ms;
                 }
             }
             response.send(res);
@@ -346,8 +404,21 @@ function sendPlayerInfo(request, response)
             var minutes = Math.floor(scoren / 60);
             var seconds = (scoren % 60).toFixed(0);
             var ms = ((scoren % 1) * 100);
+            ms = Math.round(ms);
+            if(minutes < 10)
+            {
+                minutes = "0" + minutes.toString();
+            }
+            if(seconds < 10)
+            {
+                seconds = "0" + seconds.toString();
+            }
+            if(ms < 10)
+            {
+                ms = "0" + ms.toString();
+            }
 
-            res[0].highscore = minutes + ":" + seconds + "." + ms.toFixed(0);
+            res[0].highscore = minutes + ":" + seconds + "." + ms;
         }
 
         var apiresponse = {
