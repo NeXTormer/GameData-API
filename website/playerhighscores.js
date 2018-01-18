@@ -1,6 +1,7 @@
+
 $(function ()
 {
-    $.getJSON("/highscores/spacegame", function(data) {
+    $.getJSON("highscores/spacegame", function(data) {
         fillTable(data);
     });
 
@@ -15,7 +16,7 @@ $("#gameslider").change(function() {
 function timer()
 {
     var game = document.getElementById("gameslider").checked;
-    var url = "/highscores/" + (game ? "spacegame" : "anyway");
+    var url = "highscores/" + (game ? "spacegame" : "anyway");
 
     $.getJSON(url, function(data) {
         fillTable(data);
