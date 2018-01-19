@@ -22,3 +22,7 @@ Routes:
     Adds the score <score>, the game <game> and the current date and time to the database for the player <player>. This only works if the token <token> is valid,
     otherwise an error message will be sent. If the player <player> is not already stored in the database they will be added automatically. None of the arguments
     can be left blank.
+
+/player/<name>/<game>
+
+    Returns info over the player <player> in the given game <game> such as the highscore, name, and registration date.
