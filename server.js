@@ -104,7 +104,7 @@ function sendHighscores(request, response)
                     var scoren = res[i].Highscore;
 
                     var minutes = Math.floor(scoren / 60);
-                    var seconds = (scoren % 60).toFixed(0);
+                    var seconds = Math.floor((scoren % 60));
                     var ms = ((scoren % 1) * 100);
                     ms = Math.round(ms);
                     if(minutes < 10)
@@ -156,7 +156,7 @@ function searchPlayer(request, response)
                     var scoren = res[i].Score;
 
                     var minutes = Math.floor(scoren / 60);
-                    var seconds = (scoren % 60).toFixed(0);
+                    var seconds = Math.floor((scoren % 60));
                     var ms = ((scoren % 1) * 100);
 
                     ms = Math.round(ms);
@@ -222,7 +222,7 @@ function sendScores(request, response)
                     var scoren = res[i].Score;
 
                     var minutes = Math.floor(scoren / 60);
-                    var seconds = (scoren % 60).toFixed(0);
+                    var seconds = Math.floor((scoren % 60));
                     var ms = ((scoren % 1) * 100);
 
                     ms = Math.round(ms);
@@ -402,7 +402,7 @@ function sendPlayerInfo(request, response)
             var scoren = res[0].highscore;
 
             var minutes = Math.floor(scoren / 60);
-            var seconds = (scoren % 60).toFixed(0);
+            var seconds = Math.floor((scoren % 60));
             var ms = ((scoren % 1) * 100);
             ms = Math.round(ms);
             if(minutes < 10)
