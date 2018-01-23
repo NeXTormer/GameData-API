@@ -85,45 +85,10 @@ function sendHighscores(request, response)
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++)
             {
-                //Format Date
-                var datef1 = (res[i].Date + "");
-                var date2 = datef1.split(" ");
-                var date3;
-                if(!date2[1])
-                {
-                    date3 = " ";
+                res[i].Date = formatDate(res[i].Date);
+                if(game.toLowerCase().charAt(0) === "a") {
+                    res[i].Highscore = formatTime(res[i].Highscore);
                 }
-                else
-                {
-                    date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
-                }
-
-                //Format Score
-                if(game.toLowerCase().charAt(0) === "a")
-                {
-                    var scoren = res[i].Highscore;
-
-                    var minutes = Math.floor(scoren / 60);
-                    var seconds = Math.floor((scoren % 60));
-                    var ms = ((scoren % 1) * 100);
-                    ms = Math.round(ms);
-                    if(minutes < 10)
-                    {
-                        minutes = "0" + minutes.toString();
-                    }
-                    if(seconds < 10)
-                    {
-                        seconds = "0" + seconds.toString();
-                    }
-                    if(ms < 10)
-                    {
-                        ms = "0" + ms.toString();
-                    }
-
-                    res[i].Highscore = minutes + ":" + seconds + "." + ms;
-                }
-
-                res[i].Date = date3;
             }
             response.send(res);
     });
@@ -135,48 +100,11 @@ function searchPlayer(request, response)
 
     connection.query("SELECT score as Score, p.name as Name, s.date as Date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = \"" + data.player + "\" ORDER BY date DESC;",
         function(err, res, fields) {
-            for(var i = 0; i < res.length; i++)
-            {
-                //Format Date
-                var datef1 = (res[i].Date + "");
-                var date2 = datef1.split(" ");
-                var date3;
-                if(!date2[1])
-                {
-                    date3 = " ";
+            for(var i = 0; i < res.length; i++) {
+                res[i].Date = formatDate(res[i].Date);
+                if (data.game.toLowerCase().charAt(0) === "a") {
+                    res[i].Score = formatTime(res[i].Score);
                 }
-                else
-                {
-                    date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
-                }
-
-                //Format Score
-                if(data.game.toLowerCase().charAt(0) === "a")
-                {
-                    var scoren = res[i].Score;
-
-                    var minutes = Math.floor(scoren / 60);
-                    var seconds = Math.floor((scoren % 60));
-                    var ms = ((scoren % 1) * 100);
-
-                    ms = Math.round(ms);
-                    if(minutes < 10)
-                    {
-                        minutes = "0" + minutes.toString();
-                    }
-                    if(seconds < 10)
-                    {
-                        seconds = "0" + seconds.toString();
-                    }
-                    if(ms < 10)
-                    {
-                        ms = "0" + ms.toString();
-                    }
-
-
-                    res[i].Score = minutes + ":" + seconds + "." + ms;
-                }
-                res[i].Date = date3;
             }
             response.send(res);
     });
@@ -202,45 +130,12 @@ function sendScores(request, response)
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++)
             {
-                //Format Date
-                var datef1 = (res[i].Date + "");
-                var date2 = datef1.split(" ");
-                var date3;
-                if(!date2[1])
-                {
-                    date3 = " ";
-                }
-                else
-                {
-                    date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
-                }
-                res[i].Date = date3;
+                res[i].Date = formatDate(res[i].Date);
 
                 //Format Score
                 if(game.toLowerCase().charAt(0) === "a")
                 {
-                    var scoren = res[i].Score;
-
-                    var minutes = Math.floor(scoren / 60);
-                    var seconds = Math.floor((scoren % 60));
-                    var ms = ((scoren % 1) * 100);
-
-                    ms = Math.round(ms);
-                    if(minutes < 10)
-                    {
-                        minutes = "0" + minutes.toString();
-                    }
-                    if(seconds < 10)
-                    {
-                        seconds = "0" + seconds.toString();
-                    }
-                    if(ms < 10)
-                    {
-                        ms = "0" + ms.toString();
-                    }
-
-
-                    res[i].Score = minutes + ":" + seconds + "." + ms;
+                    res[i].Score = formatTime(res[i].Score);
                 }
             }
             response.send(res);
@@ -382,43 +277,11 @@ function sendPlayerInfo(request, response)
     }
 
     connection.query(query, function(error, res, fields) {
-        //format date
-        var datef1 = (res[0].date + "");
-        var date2 = datef1.split(" ");
-        var date3;
-        if(!date2[1])
-        {
-            date3 = " ";
-        }
-        else
-        {
-            date3 = date2[4] + ", " + date2[1] + " " + date2[2] + " " + date2[3];
-        }
-        res[0].date = date3;
+        res[0].date = formatDate(res[0].date);
 
-        //format score
         if(data.game.toLowerCase().charAt(0) === "a")
         {
-            var scoren = res[0].highscore;
-
-            var minutes = Math.floor(scoren / 60);
-            var seconds = Math.floor((scoren % 60));
-            var ms = ((scoren % 1) * 100);
-            ms = Math.round(ms);
-            if(minutes < 10)
-            {
-                minutes = "0" + minutes.toString();
-            }
-            if(seconds < 10)
-            {
-                seconds = "0" + seconds.toString();
-            }
-            if(ms < 10)
-            {
-                ms = "0" + ms.toString();
-            }
-
-            res[0].highscore = minutes + ":" + seconds + "." + ms;
+            res[0].highscore = formatTime(res[0].highscore);
         }
 
         var apiresponse = {
@@ -429,4 +292,43 @@ function sendPlayerInfo(request, response)
         response.send(apiresponse);
     });
 
+}
+
+//Formats the MySQL Date to the format HH:MM:SS, MMM DD YYYY
+function formatDate(old)
+{
+    var datestring = (old + "");
+    var splitdate = datestring.split(" ");
+    var formatted;
+    if(!splitdate[1])
+    {
+        formatted = " ";
+    }
+    else
+    {
+        formatted = splitdate[4] + ", " + splitdate[1] + " " + splitdate[2] + " " + splitdate[3];
+    }
+    return formatted;
+}
+
+function formatTime(old)
+{
+    var minutes = Math.floor(old/ 60);
+    var seconds = Math.floor((old % 60));
+    var cs = ((old % 1) * 100);
+
+    cs = Math.round(cs);
+    if(minutes < 10)
+    {
+        minutes = "0" + minutes.toString();
+    }
+    if(seconds < 10)
+    {
+        seconds = "0" + seconds.toString();
+    }
+    if(cs < 10)
+    {
+        cs = "0" + cs.toString();
+    }
+    return minutes + ":" + seconds + "." + cs;
 }
