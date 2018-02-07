@@ -1,6 +1,6 @@
 body
 {
-    background-color: lightgray;
+    background-color: #EEEEEE;
 }
 
 img.main_logo_anyway
@@ -12,23 +12,13 @@ img.main_logo_anyway
     margin-bottom: 1%;
     margin-top: 1%;
 }
-img.main_logo_spacegame
-{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 85%;
-    margin-bottom: 1%;
-    margin-top: 1%;
-}
-
 
 /* Navigation bar */
 
 .topnav
 {
     overflow: hidden;
-    background-color: #919191;
+    background-color: #9E9E9E;
 
     font-family: Arial, serif;
     font-size: 24pt;
@@ -40,7 +30,7 @@ img.main_logo_spacegame
 {
     float: left;
     color: #000000;
-    background-color: #919191;
+    background-color: #9E9E9E;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -54,19 +44,19 @@ img.main_logo_spacegame
 
 .topnav a.leftnav:hover
 {
-    background-color: #919191;
+    background-color: #9E9E9E;
     color: black;
 }
 
 .topnav a:hover
 {
-    background-color: rgba(112, 112, 112, 0.7);
+    background-color: rgba(97, 97, 97, 0.53);
     color: white;
 }
 
 .topnav a.active
 {
-    background-color: #adadad;
+    background-color: #616161;
     color: white;
 }
 
@@ -86,7 +76,7 @@ table
 th
 {
     font-size: 38pt;
-    background-color: rgba(119, 119, 119, 0.31);
+    background-color: #9E9E9E;
     padding-left: 60px;
     padding-right: 60px;
 
@@ -101,14 +91,14 @@ td, tr
 
 tr:hover
 {
-    background-color: rgba(163, 163, 163, 0.31);
+    background-color: #E0E0E0;
 }
 
 /* input */
 
 button
 {
-    background-color: rgba(112, 112, 112, 0.31);
+    background-color: rgba(189, 189, 189, 0.8);
     border: white;
     padding: 5px 10px;
     text-align: center;
@@ -117,7 +107,7 @@ button
 
 .playerinfo
 {
-    background-color: rgba(112, 112, 112, 0.31);
+    background-color: rgba(189, 189, 189, 0.8);
     font-family: Arial, serif;
     padding: 5px 10px;
     font-size: 23pt;
@@ -127,7 +117,7 @@ button
 
 button:hover
 {
-    background-color: rgba(112, 112, 112, 0.5);
+    background-color: #BDBDBD;
 }
 
 button:active
@@ -137,7 +127,7 @@ button:active
 
 input
 {
-    background-color: rgba(145, 145, 145, 0.31);
+    background-color: rgba(189, 189, 189, 0.8);
     border: white;
     padding: 5px 10px;
     text-align: center;
@@ -146,7 +136,7 @@ input
 
 input:hover
 {
-    background-color: rgba(145, 145, 145, 0.5);
+    background-color: #BDBDBD;
 }
 
 div.searchtable, div.abouttext
@@ -157,25 +147,25 @@ div.searchtable, div.abouttext
 /* Placeholder text color in textfield */
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: #d3d3d3;
+    color: #E0E0E0;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: #d3d3d3;
+    color: #E0E0E0;
     opacity:  1;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: #d3d3d3;
+    color: #E0E0E0;
     opacity:  1;
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #d3d3d3;
+    color: #E0E0E0;
 }
 :-ms-input-placeholder { /* Microsoft Edge */
-    color: #d3d3d3;
+    color: #E0E0E0;
 }
 
 ::placeholder { /* Most modern browsers support this now. */
-    color: #d3d3d3;
+    color: #E0E0E0;
 }
 
 .switch
@@ -200,7 +190,7 @@ div.searchtable, div.abouttext
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #919191;
+    background-color: #9E9E9E;
     -webkit-transition: .2s;
     transition: .2s;
     margin-top: 18%;
@@ -213,7 +203,7 @@ div.searchtable, div.abouttext
     height: 36px;
     width: 36px;
 
-    background-color: #d3d3d3;
+    background-color: #EEEEEE;
     -webkit-transition: .1s;
     transition: .4s;
 
@@ -223,7 +213,7 @@ div.searchtable, div.abouttext
 }
 
 input:checked + .slider {
-    background-color: #919191;
+    background-color: #9E9E9E;
 
 }
 

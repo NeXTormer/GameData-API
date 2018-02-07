@@ -1,6 +1,6 @@
 body
 {
-    background-color: lightgray;
+    background-color: #EEEEEE;
 }
 
 img.main_logo_anyway
@@ -12,23 +12,13 @@ img.main_logo_anyway
     margin-bottom: 1%;
     margin-top: 1%;
 }
-img.main_logo_spacegame
-{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 85%;
-    margin-bottom: 1%;
-    margin-top: 1%;
-}
 
 
 /* Navigation bar */
-
 .topnav
 {
     overflow: hidden;
-    background-color: #919191;
+    background-color: #9E9E9E;
 
     font-family: Arial, serif;
     font-size: 24pt;
@@ -40,7 +30,7 @@ img.main_logo_spacegame
 {
     float: left;
     color: #000000;
-    background-color: #919191;
+    background-color: #9E9E9E;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -54,21 +44,24 @@ img.main_logo_spacegame
 
 .topnav a.leftnav:hover
 {
+    background-color: #9E9E9E;
     color: black;
-    background-color: #919191;
 }
 
 .topnav a:hover
 {
-    background-color: rgba(112, 112, 112, 0.7);
+    background-color: rgba(97, 97, 97, 0.53);
     color: white;
 }
 
 .topnav a.active
 {
-    background-color: #adadad;
+    background-color: #616161;
     color: white;
 }
+
+/* Highscore table */
+
 
 table
 {

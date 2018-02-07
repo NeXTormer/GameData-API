@@ -14,6 +14,7 @@ var port = 3000;
 fs.readFile("credentials.json", "utf8", function(error, data) {
     var json = JSON.parse(data);
 
+
     connection = mysql.createConnection(json[0]);
     api_token = json[1].token;
 
