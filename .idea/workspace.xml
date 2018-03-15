@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c9e073e-5141-4c29-a5be-e767a240a3fa" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change beforePath="$PROJECT_DIR$/website/index.html" afterPath="$PROJECT_DIR$/website/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,8 +19,8 @@
       <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2668">
-              <caret line="266" column="1" lean-forward="true" selection-start-line="266" selection-start-column="1" selection-end-line="266" selection-end-column="1" />
+            <state relative-caret-position="236">
+              <caret line="101" column="42" lean-forward="false" selection-start-line="101" selection-start-column="36" selection-end-line="101" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -121,7 +119,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>css</find>
       <find>sear</find>
       <find>log</find>
       <find>table\</find>
@@ -150,6 +147,8 @@
       <find>919191</find>
       <find>playerinfo</find>
       <find>server</find>
+      <find>mysql</find>
+      <find>mysql.esc</find>
     </findStrings>
     <replaceStrings>
       <replace>Century Gothic</replace>
@@ -180,8 +179,8 @@
         <option value="$PROJECT_DIR$/website/style.css" />
         <option value="$PROJECT_DIR$/website/home.css" />
         <option value="$PROJECT_DIR$/credentials.json" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/website/index.html" />
+        <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
   </component>
@@ -325,12 +324,12 @@
       <workItem from="1516712603832" duration="788000" />
       <workItem from="1518005765134" duration="1165000" />
       <workItem from="1520254084154" duration="930000" />
-      <workItem from="1521105431878" duration="1420000" />
+      <workItem from="1521105431878" duration="2235000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77852000" />
+    <option name="totallyTimeSpent" value="78667000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -710,8 +709,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2668">
-          <caret line="266" column="1" lean-forward="true" selection-start-line="266" selection-start-column="1" selection-end-line="266" selection-end-column="1" />
+        <state relative-caret-position="236">
+          <caret line="101" column="42" lean-forward="false" selection-start-line="101" selection-start-column="36" selection-end-line="101" selection-end-column="42" />
           <folding />
         </state>
       </provider>

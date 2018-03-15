@@ -101,7 +101,9 @@ function searchPlayer(request, response)
 
     data.player = mysql.escape(data.player);
 
-    connection.query("SELECT score as Score, p.name as Name, s.date as Date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = \"" + data.player + "\" ORDER BY date DESC;",
+    var query = "SELECT score as Score, p.name as Name, s.date as Date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = " + data.player + " ORDER BY date DESC;";
+    //console.log(query);
+    connection.query(query,
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++) {
                 res[i].Date = formatDate(res[i].Date);
@@ -149,10 +151,10 @@ function addScore(request, response)
 {
     var data = request.params;
 
-    var token = mysql.escape(data.token);
-    var player = mysql.escape(data.player);
-    var score = mysql.escape(ata.score);
-    var game = mysql.escape(data.game);
+    var token = data.token;
+    var player = data.player;
+    var score = ata.score;
+    var game = data.game;
     token = escapeHTML(token);
     player = escapeHTML(player);
     score = escapeHTML(score);
