@@ -9,7 +9,7 @@ var app = express();
 var connection;
 var api_token;
 
-var port = 3000;
+var port = 3001;
 
 fs.readFile("credentials.json", "utf8", function(error, data) {
     var json = JSON.parse(data);
@@ -34,14 +34,20 @@ server = app.listen(port, function() {
     console.log("listening on port " + port);
 });
 
-app.use(express.static("website"));
-
 app.get("/highscores/:game?", sendHighscores);
+
 app.get("/search/:player/:game?", searchPlayer);
 app.get("/scores/:count?/:game?", sendScores);
 app.get("/player/:name/:game", sendPlayerInfo);
-
+app.get("/", sendIndex);
 app.get("/addscore/:token/:player/:score/:game", addScore);
+
+app.use(express.static("website"));
+
+function sendIndex(request, response)
+{
+    response.sendfile("website/index.html");
+}
 
 function sendHighscores(request, response)
 {
