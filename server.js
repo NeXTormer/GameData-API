@@ -99,6 +99,8 @@ function searchPlayer(request, response)
 {
     var data = request.params;
 
+    data.player = mysql.escape(data.player);
+
     connection.query("SELECT score as Score, p.name as Name, s.date as Date FROM scores s, players p, games g WHERE s.player_id = p.id and s.game_id = g.id AND g.name = \"" + data.game+ "\" AND p.name = \"" + data.player + "\" ORDER BY date DESC;",
         function(err, res, fields) {
             for(var i = 0; i < res.length; i++) {
@@ -147,10 +149,14 @@ function addScore(request, response)
 {
     var data = request.params;
 
-    var token = data.token;
-    var player = data.player;
-    var score = data.score;
-    var game = data.game;
+    var token = mysql.escape(data.token);
+    var player = mysql.escape(data.player);
+    var score = mysql.escape(ata.score);
+    var game = mysql.escape(data.game);
+    token = escapeHTML(token);
+    player = escapeHTML(player);
+    score = escapeHTML(score);
+    game = escapeHTML(game);
 
     if(token !== api_token)
     {
@@ -255,7 +261,6 @@ function addScore(request, response)
                             console.log(message);
                             response.send({msg: message});
                         }
-
                     });
             }
         });
@@ -332,4 +337,11 @@ function formatTime(old)
         cs = "0" + cs.toString();
     }
     return minutes + ":" + seconds + "." + cs;
+}
+
+function escapeHTML(s) {
+    return s.replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
 }
