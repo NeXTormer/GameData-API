@@ -46,7 +46,7 @@ app.use(express.static("website"));
 
 function sendIndex(request, response)
 {
-    response.sendfile("website/index.html");
+    response.sendfile("website/redirect.html");
 }
 
 function sendHighscores(request, response)
@@ -129,16 +129,20 @@ function sendScores(request, response)
 
     if(data.game)
     {
-        game = data.game;
+        game = mysql.escape(data.game);
     }
 
     if(data.count)
     {
-        limit = data.count;
+        limit = mysql.escape(data.count);
     }
+    limit = limit.replace('\'', ' ');
+    limit = limit.replace('\'', ' ');
 
-    connection.query("SELECT s.score as Score, p.name as Name, s.date as Date FROM players p, games g, scores s WHERE g.name = \"" + game +"\" AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";",
-        function(err, res, fields) {
+    var query = "SELECT s.score as Score, p.name as Name, s.date as Date FROM players p, games g, scores s WHERE g.name = " + game + " AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";";
+    connection.query(query,
+        function(err, res, schub) {
+        console.log(query);
             for(var i = 0; i < res.length; i++)
             {
                 res[i].Date = formatDate(res[i].Date);
@@ -159,7 +163,7 @@ function addScore(request, response)
 
     var token = data.token;
     var player = data.player;
-    var score = ata.score;
+    var score = data.score;
     var game = data.game;
     token = escapeHTML(token);
     player = escapeHTML(player);
@@ -255,8 +259,8 @@ function addScore(request, response)
 
                         if(g_id !== -1)
                         {
-                            var query2 = "INSERT INTO scores (score, player_id, game_id, date) VALUES (\"" + score + "\", \"" + t_id + "\", \"" + g_id + "\", now());";
-                            connection.query(query2,
+                            var query2 = "INSERT INTO scores (score, player_id, game_id, date) VALUES (?, ?, ?, now());";
+                            connection.query(query2, [score, t_id, g_id],
                                 function(err, resp) {
                                     var message = "requested existing player [ " + t_id + ", " + player + " ] and inserted the score [ " + score + " ] for the game [ " + g_id + ", " + game + " ]."
                                     console.log(message);
@@ -277,17 +281,17 @@ function addScore(request, response)
 function sendPlayerInfo(request, response)
 {
     var data = request.params;
-    var player = data.name;
+    var player = mysql.escape(data.name);
 
 
     var query;
     if(data.game.toLowerCase().charAt(0) === "a")
     {
-        query = "SELECT p.name as name, p.regdate AS date, min(s.score) AS highscore FROM players p, scores s, games g WHERE s.player_id = p.id AND s.game_id = g.id AND g.name = \"anyway\" AND p.name = \"" + player + "\" LIMIT 1;";
+        query = "SELECT p.name as name, p.regdate AS date, min(s.score) AS highscore FROM players p, scores s, games g WHERE s.player_id = p.id AND s.game_id = g.id AND g.name = \"anyway\" AND p.name = " + player + " LIMIT 1;";
     }
     else
     {
-        query = "SELECT p.name AS name, p.regdate AS date, max(s.score) AS highscore FROM players p, scores s, games g WHERE s.player_id = p.id AND s.game_id = g.id AND g.name = \"spacegame\" AND p.name = \"" + player + "\" LIMIT 1;";
+        query = "SELECT p.name AS name, p.regdate AS date, max(s.score) AS highscore FROM players p, scores s, games g WHERE s.player_id = p.id AND s.game_id = g.id AND g.name = \"spacegame\" AND p.name = " + player + " LIMIT 1;";
     }
 
     connection.query(query, function(error, res, fields) {
