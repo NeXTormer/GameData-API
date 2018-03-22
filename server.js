@@ -139,7 +139,9 @@ function sendScores(request, response)
     limit = limit.replace('\'', ' ');
     limit = limit.replace('\'', ' ');
 
-    var query = "SELECT s.score as Score, p.name as Name, s.date as Date FROM players p, games g, scores s WHERE g.name = " + game + " AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "anyway") ? "ASC" : "DESC") + " LIMIT " + limit + ";";
+    console.log(game);
+
+    var query = "SELECT s.score as Score, p.name as Name, s.date as Date FROM players p, games g, scores s WHERE g.name = " + game + " AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "'anyway'") ? "ASC" : "DESC") + " LIMIT " + limit + ";";
     connection.query(query,
         function(err, res, schub) {
         console.log(query);
