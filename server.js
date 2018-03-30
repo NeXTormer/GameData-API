@@ -2,9 +2,11 @@ console.log("Server is starting...");
 
 var mysql = require("mysql");
 var express = require("express");
+var cors = require("cors");
 var fs = require("fs");
 
 var app = express();
+app.use(cors());
 
 var connection;
 var api_token;
