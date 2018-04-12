@@ -38,8 +38,8 @@ server = app.listen(port, function() {
 
 app.get("/highscores/:game?", sendHighscores);
 
-app.get("/search/:player/:game?", searchPlayer);
-app.get("/scores/:count?/:game?", sendScores);
+app.get("/search/:player/:game", searchPlayer);
+app.get("/scores/:count/:game", sendScores);
 app.get("/player/:name/:game", sendPlayerInfo);
 app.get("/", sendIndex);
 app.get("/addscore/:token/:player/:score/:game", addScore);
@@ -141,12 +141,12 @@ function sendScores(request, response)
     limit = limit.replace('\'', ' ');
     limit = limit.replace('\'', ' ');
 
-    console.log(game);
+    //console.log(game);
 
     var query = "SELECT s.score as Score, p.name as Name, s.date as Date FROM players p, games g, scores s WHERE g.name = " + game + " AND s.game_id = g.id AND s.player_id = p.id ORDER BY score " + ((game.toLowerCase() === "'anyway'") ? "ASC" : "DESC") + " LIMIT " + limit + ";";
     connection.query(query,
         function(err, res, schub) {
-        console.log(query);
+        //console.log(query);
             for(var i = 0; i < res.length; i++)
             {
                 res[i].Date = formatDate(res[i].Date);
